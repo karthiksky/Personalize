@@ -24,9 +24,9 @@ import java.util.ArrayList;
 public class NewAppWidget extends AppWidgetProvider {
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+                         int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
+        CharSequence widgetText = context.getString(R.string.app_name);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
@@ -39,16 +39,12 @@ public class NewAppWidget extends AppWidgetProvider {
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
+
     protected PendingIntent getPendingSelfIntent(Context context, String action) {
         Intent intent = new Intent(context, NewAppWidget.class);
         intent.setAction(action);
 
-        if(action.equalsIgnoreCase("others")) {
-            Intent intent1 = new Intent(context, OpenAppService.class);
-            return PendingIntent.getService(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override
@@ -61,7 +57,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
             String sJsonArray = Preference.getSharedPreferenceString(context, Constants.MODES, "");
 
-            if(!sJsonArray.equalsIgnoreCase("")) {
+            if (!sJsonArray.equalsIgnoreCase("")) {
 
                 JSONArray jsonArray = new JSONArray(sJsonArray);
 
@@ -78,7 +74,6 @@ public class NewAppWidget extends AppWidgetProvider {
                     jsonObject.put(Constants.IS_SELECT, false);
 
                     if (mode_type.toUpperCase().equals(intent.getAction().toUpperCase())) {
-                        //your onClick action is here
 
                         updateVolume(context, AudioManager.STREAM_SYSTEM, Integer.parseInt(call));
                         updateVolume(context, AudioManager.STREAM_ALARM, Integer.parseInt(alarm));
@@ -102,7 +97,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
         int max = value;
 
-        if(value == -1) {
+        if (value == -1) {
             max = am.getStreamMaxVolume(type);
         }
 
@@ -118,16 +113,6 @@ public class NewAppWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
-    }/*
-
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
     }
-
-    @Override
-    public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }*/
 }
 

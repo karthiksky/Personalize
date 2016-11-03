@@ -11,5 +11,7 @@
     <color name="teal">#009688</color>
     <color name="grey_500">#9E9E9E</color>
     <color name="lime_A700">#AEEA00</color>
+    <color name="notify_bg">#263238</color>
+    <color name="tr_notify_bg">#ff263238</color>
 
 </resources>

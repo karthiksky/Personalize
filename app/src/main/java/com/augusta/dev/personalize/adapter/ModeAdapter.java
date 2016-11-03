@@ -112,7 +112,6 @@ public class ModeAdapter extends BaseExpandableListAdapter {
         viewHolder.mIsSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mActivity, "" + groupPosition, Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < mModeType.size(); i++) {
                     mModeType.get(i).setSelected(false);

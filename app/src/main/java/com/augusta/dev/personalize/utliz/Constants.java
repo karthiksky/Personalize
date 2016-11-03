@@ -13,5 +13,10 @@ public class Constants {
     public final static String ALARM = "alarm";
     public final static String MODES = "modes";
 
+    public final static String TIME = "time";
+    public final static String SETTINGS = "settings";
+    public final static String MODE = "mode";
+
     public final static int NOTIFICATION_ID = 1001;
+    public final static int ONE_DAY = 24 * 60 * 60 * 1000;
 }

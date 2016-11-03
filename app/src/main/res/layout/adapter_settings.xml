@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_intro"
+    android:padding="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="55dp"
+        android:textSize="16dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="sans-serif-light"
+        android:padding="5dp"
+        android:text="Time"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_toRightOf="@+id/time"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:text="10:25 AM"
+        android:textSize="16dp"
+        android:fontFamily="sans-serif-light"
+
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/mode"
+        android:layout_below="@+id/txtTime"
+        android:layout_width="55dp"
+        android:padding="5dp"
+        android:text="Mode"
+        android:textSize="16dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="sans-serif-light"
+
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtMode"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/txtTime"
+        android:text="HOME"
+        android:layout_toRightOf="@+id/mode"
+        android:padding="5dp"
+        android:textSize="16dp"
+        android:fontFamily="sans-serif-light"
+
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:src="@drawable/rubbish_bin"
+        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/img_delete" />
+</RelativeLayout>

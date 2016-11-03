@@ -13,7 +13,8 @@
         android:layout_margin="10dp"
         android:paddingLeft="20dp"
         android:text="Silent Mode"
-        android:textSize="16sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/iv_is_selected"

@@ -2,70 +2,85 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#09C"
-    android:padding="@dimen/widget_margin">
+    android:background="@android:color/transparent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:layout_margin="1dp">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:id="@+id/normal"
-                android:text="Normal"
-                android:fontFamily="sans-serif-light"
-                android:inputType="text"
-                android:background="#bdbdbd"
-                android:layout_margin="1dp"
-                android:layout_height="match_parent" />
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:id="@+id/silent"
-                android:text="Silent"
-                android:inputType="text"
-                android:fontFamily="sans-serif-light"
-                android:background="#bdbdbd"
-                android:layout_margin="1dp"
-                android:layout_height="match_parent" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="#bdbdbd"
-                android:id="@+id/office"
-                android:fontFamily="sans-serif-light"
-                android:text="Office"
-                android:inputType="text"
-                android:layout_margin="1dp"
-                android:layout_height="match_parent" />
-            <Button
-                android:layout_width="0dp"
-                android:background="#bdbdbd"
-                android:layout_margin="1dp"
-                android:id="@+id/meeting"
-                android:fontFamily="sans-serif-light"
-                android:inputType="text"
-                android:text="Meeting"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/normal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_effect"
+            android:drawableTop="@drawable/ic_notify_normal"
+            android:fontFamily="sans-serif-light"
+            android:inputType="text"
+            android:paddingTop="5dp"
+            android:text="Normal"
 
-            <Button
-                android:layout_width="0dp"
-                android:background="#bdbdbd"
-                android:layout_margin="1dp"
-                android:id="@+id/travel"
-                android:fontFamily="sans-serif-light"
-                android:text="Travel"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+            android:textColor="@color/icons" />
+
+        <Button
+            android:id="@+id/silent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_effect"
+            android:drawableTop="@drawable/ic_notify_silent"
+            android:fontFamily="sans-serif-light"
+            android:inputType="text"
+            android:paddingTop="5dp"
+            android:text="Silent"
+            android:textColor="@color/icons" />
+
+        <Button
+            android:id="@+id/office"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_effect"
+            android:drawableTop="@drawable/ic_notify_office"
+            android:fontFamily="sans-serif-light"
+            android:inputType="text"
+            android:paddingTop="5dp"
+            android:text="Office"
+            android:textColor="@color/icons" />
+
+        <Button
+            android:id="@+id/meeting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_effect"
+            android:drawableTop="@drawable/ic_notify_meeting"
+            android:fontFamily="sans-serif-light"
+            android:inputType="text"
+            android:paddingTop="5dp"
+            android:text="Meeting"
+            android:textColor="@color/icons" />
+
+        <Button
+            android:id="@+id/travel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_effect"
+            android:drawableTop="@drawable/ic_notify_travel"
+            android:fontFamily="sans-serif-light"
+            android:inputType="text"
+            android:paddingTop="5dp"
+            android:text="Travel"
+            android:textColor="@color/icons" />
     </LinearLayout>
+
 </RelativeLayout>

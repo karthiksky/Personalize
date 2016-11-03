@@ -4,4 +4,5 @@
     <string name="add_widget">Add widget</string>
     <string name="notification_show">Notification Show</string>
     <string name="notification_clear">Notification Clear</string>
+    <string name="settings">Settings</string>
 </resources>

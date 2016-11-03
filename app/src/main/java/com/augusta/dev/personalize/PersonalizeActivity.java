@@ -40,7 +40,6 @@ public class PersonalizeActivity extends AppCompatActivity {
     private ModeAdapter mModeAdapter;
     private ArrayList<ModeParentBean> mModeType;
     private ArrayList<ArrayList<ModeChildBean>> mModeItems;
-    private int INTENT_WRITE_SETTINGS=121;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,8 @@ public class PersonalizeActivity extends AppCompatActivity {
 
         setAdapter();
         CustomNotification();
+
+
     }
 
     public void CustomNotification() {
@@ -80,49 +81,6 @@ public class PersonalizeActivity extends AppCompatActivity {
         remoteViews.setOnClickPendingIntent(R.id.meeting, getPendingSelfIntent(this, "meeting"));
         remoteViews.setOnClickPendingIntent(R.id.travel, getPendingSelfIntent(this, "travel"));
 
-       /* String sJsonArray = Preference.getSharedPreferenceString(PersonalizeActivity.this, Constants.MODES, "");
-
-        if(!sJsonArray.equalsIgnoreCase("")) {
-
-            try {
-                JSONArray jsonArray = new JSONArray(sJsonArray);
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                    String mode_type = jsonObject.getString(Constants.MODE_TYPE);
-                    boolean is_select = jsonObject.getBoolean(Constants.IS_SELECT);
-                    String call = jsonObject.getString(Constants.CALL);
-                    String music = jsonObject.getString(Constants.MUSIC);
-                    String alarm = jsonObject.getString(Constants.ALARM);
-
-                    if (is_select == true) {
-                        //your onClick action is here
-
-                        if(mode_type.toUpperCase().equalsIgnoreCase("NORMAL")) {
-                            remoteViews.setTextColor(R);
-                        } else if(mode_type.toUpperCase().equalsIgnoreCase("SILENT")) {
-
-                        } else if(mode_type.toUpperCase().equalsIgnoreCase("OFFICE")) {
-
-                        } else if(mode_type.toUpperCase().equalsIgnoreCase("MEETING")) {
-
-                        } else if(mode_type.toUpperCase().equalsIgnoreCase("TRAVEL")) {
-
-                        }
-
-                    }
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        } else {
-
-        }*/
-
         // Create Notification Manager
         NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // Build Notification with Notification Manager
@@ -136,12 +94,7 @@ public class PersonalizeActivity extends AppCompatActivity {
         Intent intent = new Intent(context, PendingBroadCastReceiver.class);
         intent.setAction(action);
 
-        if (action.equalsIgnoreCase("others")) {
-            Intent intent1 = new Intent(context, ListProfileDialogActivity.class);
-            return PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private void dataPopulate() {
@@ -196,7 +149,7 @@ public class PersonalizeActivity extends AppCompatActivity {
         ModeChildBean modeChildBean;
 
         subItem = new ArrayList<>();
-        modeChildBean = new ModeChildBean(0, 0, 0);
+        modeChildBean = new ModeChildBean(2, 2, 2);
         subItem.add(modeChildBean);
         mModeItems.add(0, subItem);
 
@@ -238,5 +191,28 @@ public class PersonalizeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.notification_clear:
+                String str = item.getTitle().toString();
+                if (str.equals(getString(R.string.notification_clear))) {
+                    NotificationManager notificationManager = (NotificationManager) this
+                            .getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.cancel(Constants.NOTIFICATION_ID);
+                    item.setTitle(R.string.notification_show);
+                } else {
+                    item.setTitle(R.string.notification_clear);
+                    CustomNotification();
+                }
+
+                return true;
+            case R.id.settings:
+                Intent intent = new Intent(PersonalizeActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

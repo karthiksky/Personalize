@@ -2,53 +2,47 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/shape_rect_white"
     android:orientation="vertical"
-    android:background="#09C"
     android:padding="@dimen/widget_margin">
 
-    <!--<TextView
-        android:id="@+id/appwidget_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:background="#09C"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
             <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
                 android:id="@+id/Normal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_effect"
+                android:drawableTop="@drawable/ic_notify_normal"
+                android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Normal"
-                android:fontFamily="sans-serif-light"
-                android:background="#bdbdbd"
-                android:layout_margin="1dp"
-                android:layout_height="match_parent" />
+                android:textColor="@color/primary_light" />
+
             <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
                 android:id="@+id/silent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_effect"
+                android:drawableTop="@drawable/ic_notify_silent"
+                android:fontFamily="sans-serif-light"
+                android:inputType="text"
                 android:text="Silent"
-                android:fontFamily="sans-serif-light"
-                android:inputType="text"
-                android:background="#bdbdbd"
-                android:layout_margin="1dp"
-                android:layout_height="match_parent" />
+                android:textColor="@color/primary_light" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,41 +51,48 @@
             android:layout_weight="1">
 
             <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="#bdbdbd"
                 android:id="@+id/office"
-                android:text="Office"
-                android:fontFamily="sans-serif-light"
-                android:inputType="text"
-                android:layout_margin="1dp"
-                android:layout_height="match_parent" />
-            <Button
                 android:layout_width="0dp"
-                android:background="#bdbdbd"
+                android:layout_height="match_parent"
                 android:layout_margin="1dp"
-                android:id="@+id/meeting"
-                android:text="Meeting"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_effect"
+                android:drawableTop="@drawable/ic_notify_office"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
+                android:text="Office"
+                android:textColor="@color/primary_light" />
+
+            <Button
+                android:id="@+id/meeting"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:background="@drawable/ripple_effect"
+                android:drawableTop="@drawable/ic_notify_meeting"
+                android:fontFamily="sans-serif-light"
+                android:inputType="text"
+                android:text="Meeting"
+                android:textColor="@color/primary_light" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
+
             <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="#bdbdbd"
                 android:id="@+id/travel"
-                android:text="Travel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="@drawable/ripple_effect"
+                android:drawableTop="@drawable/ic_notify_travel"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
-                android:layout_margin="1dp"
-                android:layout_height="match_parent" />
+                android:text="Travel"
+                android:textColor="@color/primary_light" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

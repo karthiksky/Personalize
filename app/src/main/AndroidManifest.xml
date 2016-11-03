@@ -11,6 +11,7 @@
         <activity android:name=".PersonalizeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,10 +27,16 @@
         </receiver>
         <receiver android:name=".PendingBroadCastReceiver"/>
 
-        <activity android:name=".ListProfileDialogActivity"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
+        <activity
+            android:name=".ListProfileDialogActivity"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
 
-        <service android:enabled="true" android:name=".OpenAppService" />
+        <service
+            android:name=".OpenAppService"
+            android:enabled="true" />
+
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".AddNewSettings"></activity>
     </application>
 
 </manifest>
