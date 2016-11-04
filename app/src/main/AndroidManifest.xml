@@ -26,6 +26,7 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
         <receiver android:name=".PendingBroadCastReceiver"/>
+        <receiver android:name=".broadcast.AlarmBroadCast"/>
 
         <activity
             android:name=".ListProfileDialogActivity"
