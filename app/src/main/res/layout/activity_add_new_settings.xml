@@ -11,32 +11,38 @@
         android:id="@+id/til_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/edt_time"
-            android:hint="Time"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Time" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/txt_msg_spr"
-        android:text="Mode"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/til_time"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/til_time"
+        android:layout_marginTop="10dp"
+        android:text="Mode" />
+
     <Spinner
         android:id="@+id/spr_mode"
-        android:layout_below="@+id/txt_msg_spr"
         android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp"
+        android:layout_below="@+id/txt_msg_spr"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
-        android:text="Submit"
-        android:layout_below="@+id/spr_mode"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content" />
+        android:layout_margin="2dp"
+        android:background="@drawable/ripple_effect"
+        android:fontFamily="sans-serif-light"
+        android:text="Add"
+        android:textColor="@color/divider" />
+
 </RelativeLayout>

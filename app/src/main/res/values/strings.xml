@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Personalize</string>
-    <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="notification_show">Notification Show</string>
     <string name="notification_clear">Notification Clear</string>

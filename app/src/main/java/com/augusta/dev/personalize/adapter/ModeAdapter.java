@@ -1,7 +1,10 @@
 package com.augusta.dev.personalize.adapter;
 
 import android.app.Activity;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -14,6 +17,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.augusta.dev.personalize.NewAppWidget;
+import com.augusta.dev.personalize.PersonalizeActivity;
 import com.augusta.dev.personalize.R;
 import com.augusta.dev.personalize.bean.ModeChildBean;
 import com.augusta.dev.personalize.bean.ModeParentBean;
@@ -120,6 +125,7 @@ public class ModeAdapter extends BaseExpandableListAdapter {
                 notifyDataSetChanged();
                 CommonFunction.generateModesType(mActivity, mModeType, mModeItems);
 
+                PersonalizeActivity.customNotification(mActivity);
                 updateAudioManager();
             }
         });
@@ -231,5 +237,15 @@ public class ModeAdapter extends BaseExpandableListAdapter {
                         AudioManager.STREAM_ALARM, mModeItems.get(i).get(0).getAlarmValue(), 0);
             }
         }
+
+        updateWidgetManager();
+    }
+
+    private void updateWidgetManager() {
+        Intent intent = new Intent(mActivity, NewAppWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        int ids[] = AppWidgetManager.getInstance(mActivity).getAppWidgetIds(new ComponentName(mActivity, NewAppWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        mActivity.sendBroadcast(intent);
     }
 }

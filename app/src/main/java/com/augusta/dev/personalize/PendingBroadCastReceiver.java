@@ -1,6 +1,8 @@
 package com.augusta.dev.personalize;
 
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -22,7 +24,7 @@ public class PendingBroadCastReceiver extends BroadcastReceiver {
 
             String sJsonArray = Preference.getSharedPreferenceString(context, Constants.MODES, "");
 
-            if(!sJsonArray.equalsIgnoreCase("")) {
+            if (!sJsonArray.equalsIgnoreCase("")) {
 
                 try {
                     JSONArray jsonArray = new JSONArray(sJsonArray);
@@ -51,6 +53,9 @@ public class PendingBroadCastReceiver extends BroadcastReceiver {
                     }
 
                     Preference.setSharedPreferenceString(context, Constants.MODES, jsonArray.toString());
+                    PersonalizeActivity.customNotification(context);
+                    context.sendBroadcast(new Intent(Constants.ONLISTUPDATE));
+                    updateWidgetManager(context);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -64,6 +69,14 @@ public class PendingBroadCastReceiver extends BroadcastReceiver {
         }
     }
 
+    private void updateWidgetManager(Context context) {
+        Intent intent = new Intent(context, NewAppWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        int ids[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, NewAppWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        context.sendBroadcast(intent);
+    }
+
     private void updateVolume(Context context, int type, int value) {
 
         AudioManager am =
@@ -71,7 +84,7 @@ public class PendingBroadCastReceiver extends BroadcastReceiver {
 
         int max = value;
 
-        if(value == -1) {
+        if (value == -1) {
             max = am.getStreamMaxVolume(type);
         }
 

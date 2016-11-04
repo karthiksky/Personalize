@@ -10,8 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,27 +24,27 @@
                 android:id="@+id/normal"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_normal"
+                android:drawableTop="@drawable/ic_notify_normal_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Normal"
-                android:textColor="@color/primary_light" />
+                android:textColor="@color/divider" />
 
             <Button
                 android:id="@+id/silent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_silent"
+                android:drawableTop="@drawable/ic_notify_silent_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Silent"
-                android:textColor="@color/primary_light" />
+                android:textColor="@color/divider" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,27 +56,27 @@
                 android:id="@+id/office"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_office"
+                android:drawableTop="@drawable/ic_notify_office_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Office"
-                android:textColor="@color/primary_light" />
+                android:textColor="@color/divider" />
 
             <Button
                 android:id="@+id/meeting"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_meeting"
+                android:drawableTop="@drawable/ic_notify_meeting_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Meeting"
-                android:textColor="@color/primary_light" />
+                android:textColor="@color/divider" />
         </LinearLayout>
 
         <LinearLayout
@@ -86,13 +88,13 @@
                 android:id="@+id/travel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_travel"
+                android:drawableTop="@drawable/ic_notify_travel_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Travel"
-                android:textColor="@color/primary_light" />
+                android:textColor="@color/divider" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

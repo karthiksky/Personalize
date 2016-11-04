@@ -1,20 +1,16 @@
 package com.augusta.dev.personalize;
 
-import android.Manifest;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
@@ -34,19 +30,48 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.augusta.dev.personalize.utliz.Constants.ONLISTUPDATE;
+
 public class PersonalizeActivity extends AppCompatActivity {
 
+    public static Activity mPersonalizeActivity;
     private ExpandableListView elvModeList;
-    private ModeAdapter mModeAdapter;
+    public ModeAdapter mModeAdapter;
     private ArrayList<ModeParentBean> mModeType;
     private ArrayList<ArrayList<ModeChildBean>> mModeItems;
+
+    static int[] resourceId = new int[]{R.id.normal, R.id.silent, R.id.office, R.id.meeting, R.id.travel};
+    static int[] drawableSelect = new int[]{R.drawable.ic_notify_normal_select, R.drawable.ic_notify_silent_select, R.drawable.ic_notify_office_select, R.drawable.ic_notify_meeting_select, R.drawable.ic_notify_travel_select};
+    static int[] drawableUnSelect = new int[]{R.drawable.ic_notify_normal_unselect, R.drawable.ic_notify_silent_unselect, R.drawable.ic_notify_office_unselect, R.drawable.ic_notify_meeting_unselect, R.drawable.ic_notify_travel_unselect};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalize);
-
         findViewById();
+        mPersonalizeActivity = this;
+        registerReceiver(broadcastReceiver, new IntentFilter(ONLISTUPDATE));
+    }
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // internet lost alert dialog method call from here...
+            dataPopulate();
+            setAdapter();
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         if (!Preference.getSharedPreferenceBoolean(this, Constants.IS_FIRST, false)) {
             initDataPopulate();
         } else {
@@ -54,42 +79,42 @@ public class PersonalizeActivity extends AppCompatActivity {
         }
 
         setAdapter();
-        CustomNotification();
-
-
+        customNotification(this);
     }
 
-    public void CustomNotification() {
+    public static void customNotification(Context mActivity) {
         // Using RemoteViews to bind custom layouts into Notification
-        RemoteViews remoteViews = new RemoteViews(getPackageName(),
+        RemoteViews remoteViews = new RemoteViews(mActivity.getPackageName(),
                 R.layout.custom_notification);
 
         // Open NotificationView.java Activity
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, new Intent(),
+        PendingIntent pIntent = PendingIntent.getActivity(mActivity, 0, new Intent(),
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+        updateAppWidget(mActivity, remoteViews);
+
+        NotificationCompat.Builder builder = (NotificationCompat.Builder) new NotificationCompat.Builder(mActivity)
+                .setSmallIcon(R.drawable.ic_p_24)
                 .setTicker("Notification")
                 .setAutoCancel(false)
                 .setContentIntent(pIntent)
                 .setContent(remoteViews);
 
-        remoteViews.setOnClickPendingIntent(R.id.normal, getPendingSelfIntent(this, "normal"));
-        remoteViews.setOnClickPendingIntent(R.id.silent, getPendingSelfIntent(this, "silent"));
-        remoteViews.setOnClickPendingIntent(R.id.office, getPendingSelfIntent(this, "office"));
-        remoteViews.setOnClickPendingIntent(R.id.meeting, getPendingSelfIntent(this, "meeting"));
-        remoteViews.setOnClickPendingIntent(R.id.travel, getPendingSelfIntent(this, "travel"));
+        remoteViews.setOnClickPendingIntent(R.id.normal, getPendingSelfIntent(mActivity, "normal"));
+        remoteViews.setOnClickPendingIntent(R.id.silent, getPendingSelfIntent(mActivity, "silent"));
+        remoteViews.setOnClickPendingIntent(R.id.office, getPendingSelfIntent(mActivity, "office"));
+        remoteViews.setOnClickPendingIntent(R.id.meeting, getPendingSelfIntent(mActivity, "meeting"));
+        remoteViews.setOnClickPendingIntent(R.id.travel, getPendingSelfIntent(mActivity, "travel"));
 
         // Create Notification Manager
-        NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager notificationmanager = (NotificationManager) mActivity.getSystemService(NOTIFICATION_SERVICE);
         // Build Notification with Notification Manager
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_NO_CLEAR;
         notificationmanager.notify(Constants.NOTIFICATION_ID, notification);
     }
 
-    protected PendingIntent getPendingSelfIntent(Context context, String action) {
+    protected static PendingIntent getPendingSelfIntent(Context context, String action) {
 
         Intent intent = new Intent(context, PendingBroadCastReceiver.class);
         intent.setAction(action);
@@ -204,7 +229,7 @@ public class PersonalizeActivity extends AppCompatActivity {
                     item.setTitle(R.string.notification_show);
                 } else {
                     item.setTitle(R.string.notification_clear);
-                    CustomNotification();
+                    customNotification(this);
                 }
 
                 return true;
@@ -215,4 +240,31 @@ public class PersonalizeActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private static void updateAppWidget(Context mActivity, RemoteViews remoteViews) {
+
+        try {
+
+            String sJsonArray = Preference.getSharedPreferenceString(mActivity, Constants.MODES, "");
+
+            if (!sJsonArray.equalsIgnoreCase("")) {
+
+                JSONArray jsonArray = new JSONArray(sJsonArray);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    remoteViews.setTextViewCompoundDrawables(resourceId[i], 0, drawableUnSelect[i], 0, 0);
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    if (jsonObject.getBoolean(Constants.IS_SELECT))
+                        remoteViews.setTextViewCompoundDrawables(resourceId[i], 0, drawableSelect[i], 0, 0);
+                }
+            }
+        } catch (Exception exp) {
+            Toast.makeText(mActivity, "Error " + exp.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+
 }

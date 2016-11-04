@@ -14,4 +14,8 @@
     <color name="notify_bg">#263238</color>
     <color name="tr_notify_bg">#ff263238</color>
 
+    <color name="widget_select_non">#FFFFFF</color>
+    <color name="widget_select">#4CAF50</color>
+
+
 </resources>

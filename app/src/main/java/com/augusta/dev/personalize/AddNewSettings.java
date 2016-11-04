@@ -147,17 +147,30 @@ public class AddNewSettings extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
 
-                        String ampm = " am";
+                        String ampm = " AM";
 
                         if (selectedHour > 12) {
 
                             selectedHour = selectedHour - 12;
-                            ampm = " pm";
+                            ampm = " PM";
                         } else if (selectedHour == 0) {
                             selectedHour = 12;
                         }
 
-                        edt_time.setText(selectedHour + ":" + selectedMinute + ampm);
+                        String sSelectedHour="", sSelectedMinute="";
+                        if(selectedHour <= 9) {
+                            sSelectedHour = "0" + selectedHour;
+                        } else {
+                            sSelectedHour = selectedHour + "";
+                        }
+
+                        if(selectedMinute <= 9) {
+                            sSelectedMinute = "0" + selectedMinute;
+                        } else {
+                            sSelectedMinute = selectedMinute + "";
+                        }
+
+                        edt_time.setText(sSelectedHour + ":" + sSelectedMinute + ampm);
                     }
                 }, iHour, iMin, true);
 

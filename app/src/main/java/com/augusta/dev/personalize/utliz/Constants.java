@@ -19,4 +19,5 @@ public class Constants {
 
     public final static int NOTIFICATION_ID = 1001;
     public final static int ONE_DAY = 24 * 60 * 60 * 1000;
+    public final static String ONLISTUPDATE = "onListUpdate";
 }
