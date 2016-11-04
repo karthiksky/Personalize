@@ -51,8 +51,6 @@ public class NewAppWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        //Toast.makeText(context, "Action " + intent.getAction(), Toast.LENGTH_SHORT).show();
-
         try {
 
             String sJsonArray = Preference.getSharedPreferenceString(context, Constants.MODES, "");
@@ -90,7 +88,7 @@ public class NewAppWidget extends AppWidgetProvider {
         }
     }
 
-    private void updateVolume(Context context, int type, int value) {
+    public static void updateVolume(Context context, int type, int value) {
 
         AudioManager am =
                 (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);

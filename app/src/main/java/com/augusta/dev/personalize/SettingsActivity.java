@@ -1,5 +1,8 @@
 package com.augusta.dev.personalize;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -10,10 +13,13 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.augusta.dev.personalize.adapter.SettingsAdapter;
 import com.augusta.dev.personalize.bean.SettingsEntity;
+import com.augusta.dev.personalize.broadcast.AlarmBroadCast;
 import com.augusta.dev.personalize.utliz.Constants;
 import com.augusta.dev.personalize.utliz.Preference;
 
@@ -21,6 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +124,36 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
+    private void ClearAlarm (String time) {
+
+        SimpleDateFormat format_full = new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat format_hour = new SimpleDateFormat("HH");
+        SimpleDateFormat format_minute = new SimpleDateFormat("mm");
+        int value = 0;
+        
+        try {
+            String hour = format_hour.format(format_full.parse(time));
+            String minute = format_minute.format(format_full.parse(time));
+            
+            value = Integer.parseInt(hour + minute + "");
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+
+        Intent updateServiceIntent = new Intent(this, AlarmBroadCast.class);
+        PendingIntent pendingUpdateIntent = PendingIntent.getBroadcast(this, value, updateServiceIntent, 0);
+
+        // Cancel alarms
+        try {
+            alarmManager.cancel(pendingUpdateIntent);
+        } catch (Exception e) {
+            Toast.makeText(this, "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void DeleteClick(int pos) {
         String str_json_settings = Preference.getSharedPreferenceString(SettingsActivity.this, Constants.SETTINGS, "");
         if(str_json_settings.length() != 0) {
@@ -123,6 +161,7 @@ public class SettingsActivity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(str_json_settings);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     jsonArray.remove(pos);
+                    ClearAlarm(entities.get(pos).getTime());
                     entities.remove(pos);
                 }
 

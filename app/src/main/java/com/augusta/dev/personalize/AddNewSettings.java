@@ -1,8 +1,10 @@
 package com.augusta.dev.personalize;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.augusta.dev.personalize.broadcast.AlarmBroadCast;
 import com.augusta.dev.personalize.utliz.Constants;
 import com.augusta.dev.personalize.utliz.Preference;
 
@@ -25,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.augusta.dev.personalize.utliz.Constants.ONE_DAY;
+
 public class AddNewSettings extends AppCompatActivity {
 
     EditText edt_time;
@@ -34,6 +39,7 @@ public class AddNewSettings extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     ArrayList<String> m_arr_modes = new ArrayList<>();
     AlarmManager alarmManager;
+    private PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +57,35 @@ public class AddNewSettings extends AppCompatActivity {
                 } else {
                     if(addData(edt_time.getText().toString(), spr_mode.getSelectedItem().toString())) {
                         Toast.makeText(AddNewSettings.this, "Successfully added.", Toast.LENGTH_SHORT).show();
-                        /*alarmManager= (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-// Set the alarm to start at approximately 4:00 p.m.
+                        alarmManager= (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                        // Set the alarm to start at approximately 4:00 p.m.
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTimeInMillis(System.currentTimeMillis());
-                        calendar.set(Calendar.HOUR_OF_DAY, 16);
+
+                        SimpleDateFormat format_full = new SimpleDateFormat("hh:mm a");
+                        SimpleDateFormat format_hrs = new SimpleDateFormat("HH");
+                        SimpleDateFormat format_mins = new SimpleDateFormat("mm");
+                        String sReqCode="";
+                        try {
+                            int hour_of_day = Integer.parseInt(format_hrs.format(format_full.parse(edt_time.getText().toString())));
+                            int minute = Integer.parseInt(format_mins.format(format_full.parse(edt_time.getText().toString())));
+                            calendar.set(Calendar.HOUR_OF_DAY, hour_of_day);
+                            calendar.set(Calendar.MINUTE, minute);
+                            calendar.set(Calendar.SECOND, 0);
+                            sReqCode = hour_of_day + "" + minute;
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent intent = new Intent(AddNewSettings.this, AlarmBroadCast.class);
+                        intent.setAction("alarm");
+                        intent.putExtra("mode", spr_mode.getSelectedItem().toString());
+                        alarmIntent = PendingIntent.getBroadcast(AddNewSettings.this, Integer.parseInt(sReqCode), intent, 0);
                         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                                1000*60*60*24, alarmIntent);*/
+                                ONE_DAY, alarmIntent);
+
                         finish();
+
                     } else {
                         Toast.makeText(AddNewSettings.this, "Some error is occur", Toast.LENGTH_SHORT).show();
                     }
