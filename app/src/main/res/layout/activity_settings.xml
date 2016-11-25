@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    tools:context="com.augusta.dev.personalize.SettingsActivity">
+    tools:context="com.augusta.dev.personalize.SettingActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcv_list_automatic_settings"
@@ -22,7 +22,7 @@
         android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_plus"
+        app:srcCompat="@drawable/ic_plus"
         app:layout_anchor="@id/elv_mode"
         app:layout_anchorGravity="bottom|right|end" />
 </RelativeLayout>

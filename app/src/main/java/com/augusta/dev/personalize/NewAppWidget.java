@@ -7,9 +7,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.support.v7.app.AppCompatDelegate;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.augusta.dev.personalize.utliz.CommonFunction;
 import com.augusta.dev.personalize.utliz.Constants;
 import com.augusta.dev.personalize.utliz.Preference;
 
@@ -27,7 +29,6 @@ public class NewAppWidget extends AppWidgetProvider {
     int[] resourceId = new int[]{R.id.normal, R.id.silent, R.id.office, R.id.meeting, R.id.travel};
     int[] drawableSelect = new int[]{R.drawable.ic_notify_normal_select, R.drawable.ic_notify_silent_select, R.drawable.ic_notify_office_select, R.drawable.ic_notify_meeting_select, R.drawable.ic_notify_travel_select};
     int[] drawableUnSelect = new int[]{R.drawable.ic_notify_normal_unselect, R.drawable.ic_notify_silent_unselect, R.drawable.ic_notify_office_unselect, R.drawable.ic_notify_meeting_unselect, R.drawable.ic_notify_travel_unselect};
-
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                          int appWidgetId) {
@@ -61,10 +62,13 @@ public class NewAppWidget extends AppWidgetProvider {
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
-                    views.setTextViewCompoundDrawables(resourceId[i], 0, drawableUnSelect[i], 0, 0);
+                    //views.setTextViewCompoundDrawables(resourceId[i], 0, drawableUnSelect[i], 0, 0);
+                    CommonFunction.setVectorRemoteView(views, resourceId[i], i, false);
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    if (jsonObject.getBoolean(Constants.IS_SELECT))
-                        views.setTextViewCompoundDrawables(resourceId[i], 0, drawableSelect[i], 0, 0);
+                    if (jsonObject.getBoolean(Constants.IS_SELECT)) {
+                        CommonFunction.setVectorRemoteView(views, resourceId[i], i, true);
+                        //views.setTextViewCompoundDrawables(resourceId[i], 0, drawableSelect[i], 0, 0);
+                    }
                 }
             }
         } catch (Exception exp) {
@@ -107,14 +111,18 @@ public class NewAppWidget extends AppWidgetProvider {
 
                     jsonObject.put(Constants.IS_SELECT, false);
 
-                    views.setTextViewCompoundDrawables(resourceId[i], 0, drawableUnSelect[i], 0, 0);
+                    //views.setTextViewCompoundDrawables(resourceId[i], 0, drawableUnSelect[i], 0, 0);
+                    CommonFunction.setVectorRemoteView(views, resourceId[i], i, false);
+                    //CommonFunction.setVectorRemoteView(views, resourceId[i], i,false);
                     if (mode_type.toUpperCase().equals(intent.getAction().toUpperCase())) {
                         updateVolume(context, AudioManager.STREAM_SYSTEM, Integer.parseInt(call));
                         updateVolume(context, AudioManager.STREAM_ALARM, Integer.parseInt(alarm));
                         updateVolume(context, AudioManager.STREAM_MUSIC, Integer.parseInt(music));
                         result = true;
                         jsonObject.put(Constants.IS_SELECT, true);
-                        views.setTextViewCompoundDrawables(resourceId[i], 0, drawableSelect[i], 0, 0);
+                        //views.setTextViewCompoundDrawables(resourceId[i], 0, drawableSelect[i], 0, 0);
+                        CommonFunction.setVectorRemoteView(views, resourceId[i], i, true);
+                        //  CommonFunction.setVectorRemoteView(views, resourceId[i], i,true);
                     }
                 }
                 if (result) {

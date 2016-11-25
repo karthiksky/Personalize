@@ -15,7 +15,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.augusta.dev.personalize.NewAppWidget;
 import com.augusta.dev.personalize.PersonalizeActivity;
@@ -108,9 +107,11 @@ public class ModeAdapter extends BaseExpandableListAdapter {
 
         if (bean.isSelected()) {
             viewHolder.mIsSelected.setImageResource(R.drawable.ic_check_circle);
+            //CommonFunction.setVectorDrawable(mActivity, viewHolder.mIsSelected, R.drawable.ic_check_circle);
             viewHolder.mModeTypes.setTextColor(ContextCompat.getColor(mActivity, R.color.teal));
         } else {
             viewHolder.mIsSelected.setImageResource(R.drawable.ic_check_blank_circle);
+            //CommonFunction.setVectorDrawable(mActivity, viewHolder.mIsSelected, R.drawable.ic_check_blank_circle);
             viewHolder.mModeTypes.setTextColor(ContextCompat.getColor(mActivity, R.color.grey_500));
         }
 

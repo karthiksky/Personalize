@@ -10,10 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +27,6 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_normal_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Normal"
@@ -40,7 +39,6 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_silent_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Silent"
@@ -59,7 +57,6 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_office_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Office"
@@ -72,7 +69,6 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_meeting_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Meeting"
@@ -90,7 +86,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:background="@drawable/ripple_effect"
-                android:drawableTop="@drawable/ic_notify_travel_select"
                 android:fontFamily="sans-serif-light"
                 android:inputType="text"
                 android:text="Travel"

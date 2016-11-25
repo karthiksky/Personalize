@@ -15,15 +15,12 @@
             android:id="@+id/normal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="1dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_effect"
-            android:drawableTop="@drawable/ic_notify_normal_unselect"
             android:fontFamily="sans-serif-light"
             android:inputType="text"
-            android:paddingTop="5dp"
-            android:text="Normal"
-
+            android:padding="10dp"
+            android:text="@string/str_normal"
             android:textColor="@color/icons" />
 
         <Button
@@ -33,25 +30,23 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_effect"
-            android:drawableTop="@drawable/ic_notify_silent_unselect"
             android:fontFamily="sans-serif-light"
             android:inputType="text"
             android:paddingTop="5dp"
-            android:text="Silent"
+            android:text="@string/str_silent"
             android:textColor="@color/icons" />
 
         <Button
             android:id="@+id/office"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="1dp"
+
             android:layout_weight="1"
             android:background="@drawable/ripple_effect"
-            android:drawableTop="@drawable/ic_notify_office_unselect"
             android:fontFamily="sans-serif-light"
             android:inputType="text"
             android:paddingTop="5dp"
-            android:text="Office"
+            android:text="@string/str_office"
             android:textColor="@color/icons" />
 
         <Button
@@ -61,25 +56,22 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_effect"
-            android:drawableTop="@drawable/ic_notify_meeting_unselect"
             android:fontFamily="sans-serif-light"
             android:inputType="text"
             android:paddingTop="5dp"
-            android:text="Meeting"
+            android:text="@string/str_meeting"
             android:textColor="@color/icons" />
 
         <Button
             android:id="@+id/travel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="1dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_effect"
-            android:drawableTop="@drawable/ic_notify_travel_unselect"
             android:fontFamily="sans-serif-light"
             android:inputType="text"
             android:paddingTop="5dp"
-            android:text="Travel"
+            android:text="@string/str_travel"
             android:textColor="@color/icons" />
     </LinearLayout>
 

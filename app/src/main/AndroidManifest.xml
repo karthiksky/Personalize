@@ -25,8 +25,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
-        <receiver android:name=".PendingBroadCastReceiver"/>
-        <receiver android:name=".broadcast.AlarmBroadCast"/>
+        <receiver android:name=".broadcast.PendingBroadCastReceiver"/>
+        <receiver android:name=".broadcast.AlarmBroadCastReceiver"/>
 
         <activity
             android:name=".ListProfileDialogActivity"
@@ -36,8 +36,8 @@
             android:name=".OpenAppService"
             android:enabled="true" />
 
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".AddNewSettings"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".AddNewSettingActivity"></activity>
     </application>
 
 </manifest>

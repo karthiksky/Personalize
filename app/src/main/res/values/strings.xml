@@ -4,4 +4,11 @@
     <string name="notification_show">Notification Show</string>
     <string name="notification_clear">Notification Clear</string>
     <string name="settings">Settings</string>
+
+    <string name="str_travel">Travel</string>
+    <string name="str_meeting">Meeting</string>
+    <string name="str_office">Office</string>
+    <string name="str_silent">Silent</string>
+    <string name="str_normal">Normal</string>
+
 </resources>
